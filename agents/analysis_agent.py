@@ -1,12 +1,32 @@
+from models.groq_client import client
+
+
 def analysis_agent(results):
     """
     Analysis Agent
-    Combines retrieved chunks into one summary.
+    Uses Groq AI to summarize retrieved research papers.
     """
 
-    summary = ""
+    context = ""
 
     for result in results:
-        summary += result.page_content + "\n\n"
+        context += result.page_content + "\n\n"
 
-    return summary
+    response = client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are an expert research assistant. "
+                    "Read the retrieved research papers and produce a clear, concise academic summary."
+                )
+            },
+            {
+                "role": "user",
+                "content": context
+            }
+        ]
+    )
+
+    return response.choices[0].message.content

@@ -34,7 +34,7 @@ for i, result in enumerate(results, start=1):
 print("\n" + "=" * 60)
 print("SUMMARY")
 print("=" * 60)
-print(summary[:1000])
+print(summary)
 print("\n" + "=" * 60)
 print("TESTING GROQ")
 print("=" * 60)
