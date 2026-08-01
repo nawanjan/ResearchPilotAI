@@ -3,6 +3,7 @@ from rag.chunker import split_documents
 from rag.retriever import create_vector_store, search_documents
 from agents.research_agent import research_agent
 from agents.analysis_agent import analysis_agent
+from agents.reflection_agent import reflection_agent
 from models.groq_client import client
 # Load documents
 documents = load_documents()
@@ -30,11 +31,17 @@ for i, result in enumerate(results, start=1):
     print()
 
     summary = analysis_agent(results)
+    final_answer = reflection_agent(summary)
 
 print("\n" + "=" * 60)
-print("SUMMARY")
+print("AI SUMMARY")
 print("=" * 60)
 print(summary)
+
+print("\n" + "=" * 60)
+print("FINAL IMPROVED ANSWER")
+print("=" * 60)
+print(final_answer)
 print("\n" + "=" * 60)
 print("TESTING GROQ")
 print("=" * 60)
