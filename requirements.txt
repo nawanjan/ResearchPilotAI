@@ -7,3 +7,4 @@ pypdf
 sentence-transformers
 groq
 python-dotenv
+langchain-huggingface
